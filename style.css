@@ -1,0 +1,86 @@
+/* Basic navigation styles + responsive mobile toggle */
+
+/* Cleaned stylesheet for personal portfolio navigation and basic layout */
+
+:root{ --accent:#06b6d4; --text:#111827; }
+
+html { scroll-behavior: smooth; }
+
+/* Reset */
+*{box-sizing:border-box; margin:0; padding:0}
+html,body{height:100%}
+body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color:var(--text); background:#fff}
+
+/* Header / Navbar */
+.site-nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;position:sticky;top:0;background:rgba(255,255,255,0.96);backdrop-filter:blur(8px);z-index:50;border-bottom:1px solid rgba(0,0,0,0.06)}
+.logo{font-weight:700;color:var(--text);letter-spacing:.2px}
+
+/* Links */
+.nav-links{display:flex;gap:1rem;list-style:none;margin:0;padding:0}
+.nav-links li a{text-decoration:none;color:var(--text);padding:.45rem .6rem;border-radius:6px;transition:color .15s,transform .12s;font-weight:500}
+.nav-links li a:hover{color:var(--accent);transform:translateY(-1px)}
+.nav-links li a.active{color:var(--accent);box-shadow:inset 0 -2px 0 var(--accent)}
+
+/* Burger for mobile */
+.burger{display:none;cursor:pointer}
+.burger div{width:25px;height:3px;background-color:var(--text);margin:5px;transition:all .25s ease}
+.toggle .line1{transform:rotate(-45deg) translate(-5px,6px)}
+.toggle .line2{opacity:0}
+.toggle .line3{transform:rotate(45deg) translate(-5px,-6px)}
+
+/* Mobile menu */
+@media (max-width:768px){
+  .burger{display:block}
+  .nav-links{position:fixed;right:0;top:0;height:100vh;width:100%;background:rgba(255,255,255,0.98);backdrop-filter:blur(8px);flex-direction:column;align-items:center;justify-content:center;transform:translateX(100%);transition:transform .35s ease;z-index:999}
+  .nav-links li{margin:20px 0}
+  .nav-active{transform:translateX(0)}
+}
+
+/* Basic page sections for layout */
+section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:4rem}
+
+/* Nav link animation used by JS */
+@keyframes navLinkFade{from{opacity:0;transform:translateX(50px)}to{opacity:1;transform:none}}
+
+/* Keep file minimal and focused on portfolio header + layout */
+/* end of stylesheet */
+
+/* show a bouncing down arrow in the hero */
+#home{ position:relative; }
+
+.scroll-down{
+  position:absolute;
+  left:50%;
+  bottom:36px;
+  transform:translateX(-50%);
+  width:44px;
+  height:44px;
+  display:inline-grid;
+  place-items:center;
+  border-radius:999px;
+  text-decoration:none;
+  color:var(--text);
+  background:transparent;
+  transition:transform .15s ease;
+}
+.scroll-down:hover{ transform:translateX(-50%) translateY(-4px); }
+
+/* arrow shape (rotated chevron) */
+.scroll-down .arrow{
+  width:12px;
+  height:12px;
+  border-bottom:3px solid currentColor;
+  border-right:3px solid currentColor;
+  transform:rotate(45deg);
+  display:inline-block;
+  margin-top:2px;
+  opacity:.95;
+  animation:arrow-bounce 1.6s infinite;
+}
+
+/* subtle bounce */
+@keyframes arrow-bounce{
+  0%{ transform:rotate(45deg) translateY(0); opacity:.95; }
+  50%{ transform:rotate(45deg) translateY(6px); opacity:.65; }
+  100%{ transform:rotate(45deg) translateY(0); opacity:.95; }
+}
