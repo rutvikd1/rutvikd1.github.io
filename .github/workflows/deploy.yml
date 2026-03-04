@@ -1,20 +1,27 @@
 name: Deploy
-
 on:
   push:
     branches:
       - main
+
+# THIS IS THE FIX: Explicitly grant the script permission to write to your repository
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
       - uses: actions/setup-node@v3
         with:
           node-version: 20
+          
       - run: npm ci
+      
       - run: npm run build
+      
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
