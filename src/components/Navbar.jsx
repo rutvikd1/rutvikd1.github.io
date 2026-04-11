@@ -73,7 +73,7 @@ function Navbar({ theme, onToggleTheme }) {
     <nav style={navStyle}>
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '14px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px' }}>
         <Link to="/" onClick={closeMenu} style={{ fontSize: '20px', fontWeight: '800', color: 'var(--nav-text)', textDecoration: 'none' }}>
-          Rutvik D
+          Curious
         </Link>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
