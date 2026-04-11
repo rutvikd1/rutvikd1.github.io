@@ -2,12 +2,12 @@ import React from 'react';
 
 const About = () => {
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '80px 20px' }}>
+    <div id="about" style={{ maxWidth: '1200px', margin: '0 auto', padding: '80px 20px' }}>
       <div style={{ marginBottom: '40px' }}>
         <h2 style={{
           fontSize: '36px',
           fontWeight: '800',
-          color: '#111827',
+          color: 'var(--text-primary)',
           marginBottom: '20px'
         }}>
           About Me
@@ -21,14 +21,14 @@ const About = () => {
         alignItems: 'center'
       }}>
         <div style={{
-          backgroundColor: '#f3f4f6',
+          backgroundColor: 'var(--surface-alt)',
           borderRadius: '12px',
           padding: '40px',
           minHeight: '300px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: '#9ca3af'
+          color: 'var(--text-secondary)'
         }}>
           <p style={{ fontSize: '16px', fontWeight: '500' }}>Photo or profile image</p>
         </div>
@@ -36,7 +36,7 @@ const About = () => {
         <div>
           <p style={{
             fontSize: '16px',
-            color: '#4b5563',
+            color: 'var(--text-secondary)',
             lineHeight: '1.8',
             marginBottom: '20px'
           }}>
@@ -44,7 +44,7 @@ const About = () => {
           </p>
           <p style={{
             fontSize: '16px',
-            color: '#4b5563',
+            color: 'var(--text-secondary)',
             lineHeight: '1.8',
             marginBottom: '20px'
           }}>
@@ -52,7 +52,7 @@ const About = () => {
           </p>
           <p style={{
             fontSize: '16px',
-            color: '#4b5563',
+            color: 'var(--text-secondary)',
             lineHeight: '1.8'
           }}>
             When I'm not coding or building systems, you'll find me exploring new research papers, contributing to open-source projects, or experimenting with new technologies.

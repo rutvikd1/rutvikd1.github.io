@@ -4,10 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d dist -b gh-pages",
+  "dev": "vite",
+  "build": "vite build",
+  "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+  "preview": "vite preview"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.2.1",
@@ -31,4 +33,6 @@
     "tailwindcss": "^4.2.1",
     "vite": "^7.3.1"
   }
+
 }
+

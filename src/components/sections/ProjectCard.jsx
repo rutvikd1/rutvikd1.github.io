@@ -8,17 +8,19 @@ const ProjectCard = ({ title, description, icon, techStack, projectLink }) => {
     <Link to={projectLink} style={{ textDecoration: 'none', color: 'inherit' }}>
       <div
         style={{
-          backgroundColor: 'white',
+          backgroundColor: 'var(--surface-bg)',
           borderRadius: '12px',
           padding: '28px',
-          boxShadow: isHovered ? '0 20px 40px rgba(0, 0, 0, 0.12)' : '0 4px 12px rgba(0, 0, 0, 0.06)',
-          border: '1px solid #e5e7eb',
+          boxShadow: isHovered ? 'var(--card-shadow-hover)' : 'var(--card-shadow)',
+          border: '1px solid var(--border-color)',
           transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           cursor: 'pointer',
           transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
           height: '100%',
           display: 'flex',
-          flexDirection: 'column'
+          flexDirection: 'column',
+          position: 'relative',
+          zIndex: isHovered ? 10 : 1
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -34,7 +36,7 @@ const ProjectCard = ({ title, description, icon, techStack, projectLink }) => {
         <h3 style={{
           fontSize: '18px',
           fontWeight: '700',
-          color: '#111827',
+          color: 'var(--text-primary)',
           marginBottom: '12px',
           marginTop: 0
         }}>
@@ -44,7 +46,7 @@ const ProjectCard = ({ title, description, icon, techStack, projectLink }) => {
         {/* Description */}
         <p style={{
           fontSize: '14px',
-          color: '#6b7280',
+          color: 'var(--text-secondary)',
           lineHeight: '1.5',
           marginBottom: '20px',
           flex: 1

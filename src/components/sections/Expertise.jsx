@@ -38,14 +38,14 @@ const Expertise = () => {
         <h2 style={{
           fontSize: '36px',
           fontWeight: '800',
-          color: '#111827',
+          color: 'var(--text-primary)',
           marginBottom: '16px'
         }}>
           Expertise
         </h2>
         <p style={{
           fontSize: '16px',
-          color: '#6b7280',
+          color: 'var(--text-secondary)',
           maxWidth: '500px',
           margin: '0 auto'
         }}>
@@ -60,23 +60,23 @@ const Expertise = () => {
       }}>
         {skills.map((skillGroup, index) => (
           <div key={index} style={{
-            backgroundColor: 'white',
-            border: '1px solid #e5e7eb',
+            backgroundColor: 'var(--surface-bg)',
+            border: '1px solid var(--border-color)',
             borderRadius: '12px',
             padding: '28px',
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.06)',
+            boxShadow: 'var(--card-shadow)',
             transition: 'all 0.3s'
           }} onMouseEnter={(e) => {
-            e.currentTarget.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.12)';
+            e.currentTarget.style.boxShadow = 'var(--card-shadow-hover)';
             e.currentTarget.style.transform = 'translateY(-4px)';
           }} onMouseLeave={(e) => {
-            e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.06)';
+            e.currentTarget.style.boxShadow = 'var(--card-shadow)';
             e.currentTarget.style.transform = 'translateY(0)';
           }}>
             <h3 style={{
               fontSize: '18px',
               fontWeight: '700',
-              color: '#111827',
+              color: 'var(--text-primary)',
               marginBottom: '16px',
               marginTop: 0
             }}>

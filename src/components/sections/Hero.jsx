@@ -17,7 +17,7 @@ const Hero = () => {
 
     const primaryStyle = {
       padding: '14px 32px',
-      backgroundColor: '#2563eb',
+      backgroundColor: 'var(--hero-primary-bg, #2563eb)',
       color: 'white',
       textDecoration: 'none',
       borderRadius: '10px',
@@ -32,9 +32,9 @@ const Hero = () => {
 
     const secondaryStyle = {
       padding: '14px 32px',
-      border: '2px solid #e5e7eb',
+      border: '2px solid var(--hero-cta-secondary-border)',
       backgroundColor: 'transparent',
-      color: '#374151',
+      color: 'var(--hero-cta-secondary-text)',
       textDecoration: 'none',
       borderRadius: '10px',
       fontWeight: '600',
@@ -66,12 +66,13 @@ const Hero = () => {
     <div style={{
       position: 'relative',
       overflow: 'hidden',
-      background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%)',
+      background: 'var(--hero-bg)',
       padding: '120px 20px 100px',
       minHeight: '90vh',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      width: '100%'
     }}>
       {/* Animated background elements */}
       <div style={{
@@ -80,7 +81,7 @@ const Hero = () => {
         right: '-10%',
         width: '500px',
         height: '500px',
-        background: 'radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, var(--hero-glow-1) 0%, transparent 70%)',
         borderRadius: '50%',
         filter: 'blur(40px)',
         animation: 'float 6s ease-in-out infinite'
@@ -92,7 +93,7 @@ const Hero = () => {
         left: '-5%',
         width: '400px',
         height: '400px',
-        background: 'radial-gradient(circle, rgba(147, 51, 234, 0.12) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, var(--hero-glow-2) 0%, transparent 70%)',
         borderRadius: '50%',
         filter: 'blur(40px)',
         animation: 'float 8s ease-in-out infinite reverse'
@@ -102,7 +103,7 @@ const Hero = () => {
       <div style={{
         position: 'absolute',
         inset: 0,
-        backgroundImage: 'linear-gradient(rgba(229, 231, 235, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(229, 231, 235, 0.5) 1px, transparent 1px)',
+        backgroundImage: 'linear-gradient(rgba(148, 163, 184, 0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.22) 1px, transparent 1px)',
         backgroundSize: '50px 50px',
         opacity: 0.3,
         pointerEvents: 'none'
@@ -143,12 +144,12 @@ const Hero = () => {
         }}>
           <span style={{
             padding: '8px 14px',
-            backgroundColor: 'rgba(37, 99, 235, 0.1)',
-            color: '#1e40af',
+            backgroundColor: 'var(--hero-badge-bg)',
+            color: 'var(--hero-badge-text)',
             borderRadius: '50px',
             fontSize: '13px',
             fontWeight: '600',
-            border: '1px solid rgba(37, 99, 235, 0.2)',
+            border: '1px solid var(--hero-badge-border)',
             display: 'inline-block'
           }}>
             ✨ Welcome to my portfolio
@@ -162,9 +163,9 @@ const Hero = () => {
           lineHeight: '1.15',
           marginBottom: '24px',
           marginTop: '0',
-          color: '#111827',
+          color: 'var(--text-primary)',
           animation: 'slideInUp 0.8s ease-out 0.1s backwards',
-          backgroundImage: 'linear-gradient(135deg, #111827 0%, #2563eb 50%, #7c3aed 100%)',
+          backgroundImage: 'var(--hero-heading-gradient)',
           backgroundSize: '200% 200%',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
@@ -176,14 +177,14 @@ const Hero = () => {
         {/* Subheading */}
         <p style={{
           fontSize: 'clamp(16px, 2vw, 20px)',
-          color: '#4b5563',
+          color: 'var(--text-secondary)',
           lineHeight: '1.7',
           marginBottom: '40px',
           maxWidth: '700px',
           margin: '0 auto 40px',
           animation: 'slideInUp 0.8s ease-out 0.2s backwards'
         }}>
-          I'm a roboticist and AI engineer specializing in computer vision, sensor fusion, and autonomous systems. Let's create something extraordinary together.
+          I'm a roboticist and AI engineer specializing in computer vision, sensor fusion, and autonomous systems.
         </p>
 
         {/* CTA Buttons */}
@@ -198,12 +199,12 @@ const Hero = () => {
           <ButtonWithHover href="#projects" variant="primary">
             View My Work →
           </ButtonWithHover>
-          <ButtonWithHover href="https://github.com" variant="secondary">
+          <ButtonWithHover href="https://github.com/rutvikd1" variant="secondary">
             GitHub Profile
           </ButtonWithHover>
         </div>
 
-        {/* Social Links */}
+        {/* Social Links */}  
         <div style={{
           display: 'flex',
           gap: '24px',
@@ -211,71 +212,71 @@ const Hero = () => {
           marginBottom: '60px',
           animation: 'slideInUp 0.8s ease-out 0.4s backwards'
         }}>
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" style={{
+          <a href="https://www.linkedin.com/in/rutvik-dagadkhair" target="_blank" rel="noreferrer" style={{
             width: '44px',
             height: '44px',
             borderRadius: '50%',
-            backgroundColor: '#f3f4f6',
+            backgroundColor: 'var(--hero-icon-bg)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#374151',
+            color: 'var(--hero-icon-text)',
             textDecoration: 'none',
             transition: 'all 0.3s',
             fontSize: '20px'
           }} onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#2563eb';
+            e.currentTarget.style.backgroundColor = 'var(--hero-primary-bg, #2563eb)';
             e.currentTarget.style.color = 'white';
             e.currentTarget.style.transform = 'translateY(-4px)';
           }} onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = '#f3f4f6';
-            e.currentTarget.style.color = '#374151';
+            e.currentTarget.style.backgroundColor = 'var(--hero-icon-bg)';
+            e.currentTarget.style.color = 'var(--hero-icon-text)';
             e.currentTarget.style.transform = 'translateY(0)';
           }}>
             in
           </a>
-          <a href="https://twitter.com" target="_blank" rel="noreferrer" style={{
+          <a href="mailto:your.email@example.com" style={{
             width: '44px',
             height: '44px',
             borderRadius: '50%',
-            backgroundColor: '#f3f4f6',
+            backgroundColor: 'var(--hero-icon-bg)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#374151',
+            color: 'var(--hero-icon-text)',
             textDecoration: 'none',
             transition: 'all 0.3s',
             fontSize: '20px'
           }} onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#2563eb';
+            e.currentTarget.style.backgroundColor = 'var(--hero-primary-bg, #2563eb)';
             e.currentTarget.style.color = 'white';
             e.currentTarget.style.transform = 'translateY(-4px)';
           }} onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = '#f3f4f6';
-            e.currentTarget.style.color = '#374151';
+            e.currentTarget.style.backgroundColor = 'var(--hero-icon-bg)';
+            e.currentTarget.style.color = 'var(--hero-icon-text)';
             e.currentTarget.style.transform = 'translateY(0)';
           }}>
-            𝕏
+            ✉️
           </a>
-          <a href="https://github.com" target="_blank" rel="noreferrer" style={{
+          <a href="https://github.com/rutvikd1" target="_blank" rel="noreferrer" style={{
             width: '44px',
             height: '44px',
             borderRadius: '50%',
-            backgroundColor: '#f3f4f6',
+            backgroundColor: 'var(--hero-icon-bg)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#374151',
+            color: 'var(--hero-icon-text)',
             textDecoration: 'none',
             transition: 'all 0.3s',
             fontSize: '20px'
           }} onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#2563eb';
+            e.currentTarget.style.backgroundColor = 'var(--hero-primary-bg, #2563eb)';
             e.currentTarget.style.color = 'white';
             e.currentTarget.style.transform = 'translateY(-4px)';
           }} onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = '#f3f4f6';
-            e.currentTarget.style.color = '#374151';
+            e.currentTarget.style.backgroundColor = 'var(--hero-icon-bg)';
+            e.currentTarget.style.color = 'var(--hero-icon-text)';
             e.currentTarget.style.transform = 'translateY(0)';
           }}>
             ⚙️
@@ -288,7 +289,7 @@ const Hero = () => {
           flexDirection: 'column',
           alignItems: 'center',
           gap: '8px',
-          color: '#9ca3af',
+          color: 'var(--text-secondary)',
           fontSize: '13px',
           animation: 'slideInUp 0.8s ease-out 0.5s backwards'
         }}>
@@ -296,7 +297,7 @@ const Hero = () => {
           <div style={{
             width: '24px',
             height: '32px',
-            border: '2px solid #e5e7eb',
+            border: '2px solid var(--hero-scroll-border)',
             borderRadius: '12px',
             display: 'flex',
             alignItems: 'flex-start',
@@ -307,7 +308,7 @@ const Hero = () => {
             <div style={{
               width: '3px',
               height: '8px',
-              backgroundColor: '#9ca3af',
+              backgroundColor: 'var(--hero-scroll-border)',
               borderRadius: '2px'
             }} />
           </div>

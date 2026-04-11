@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-function Navbar() {
+function Navbar({ theme, onToggleTheme }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(
@@ -43,7 +43,9 @@ function Navbar() {
 
   const navLinks = [
     { path: '/', label: 'Home' },
-    { path: '/projects/nuclear-localization', label: 'Projects' },
+    { path: '/resume', label: 'Resume' },
+    { path: '/#journey', label: 'Journey', isHash: true },
+    { path: '/#projects', label: 'Projects', isHash: true },
     { path: '/projects/fallen-tree-detection', label: 'About' }
   ];
 
@@ -54,16 +56,14 @@ function Navbar() {
     right: 0,
     zIndex: 1000,
     transition: 'all 0.25s ease',
-    backdropFilter: 'blur(12px)',
-    WebkitBackdropFilter: 'blur(12px)',
-    backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.7)' : 'rgba(255, 255, 255, 0.1)',
-    color: scrolled ? '#111827' : 'white',
-    borderBottom: scrolled ? '1px solid rgba(229, 231, 235, 0.3)' : '1px solid rgba(255,255,255,0.15)',
-    boxShadow: scrolled ? '0 4px 14px rgba(0,0,0,0.05)' : 'none'
+    backgroundColor: 'var(--nav-bg)',
+    color: 'var(--nav-text)',
+    borderBottom: '1px solid var(--nav-border)',
+    boxShadow: scrolled ? '0 2px 8px rgba(0,0,0,0.08)' : 'none'
   };
 
   const linkStyle = (active) => ({
-    color: active ? (scrolled ? '#2563eb' : '#93c5fd') : (scrolled ? '#374151' : 'white'),
+    color: active ? '#2563eb' : 'var(--nav-muted)',
     textDecoration: 'none',
     fontWeight: active ? 700 : 500,
     transition: 'color 0.2s ease'
@@ -71,43 +71,68 @@ function Navbar() {
 
   return (
     <nav style={navStyle}>
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '14px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Link to="/" onClick={closeMenu} style={{ fontSize: '20px', fontWeight: '800', color: scrolled ? '#111827' : 'white', textDecoration: 'none' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '14px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px' }}>
+        <Link to="/" onClick={closeMenu} style={{ fontSize: '20px', fontWeight: '800', color: 'var(--nav-text)', textDecoration: 'none' }}>
           Rutvik D
         </Link>
 
-        {!isMobile ? (
-          <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-            {navLinks.map((link) => (
-              <Link key={link.path} to={link.path} style={linkStyle(isActive(link.path))}>
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        ) : (
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          {!isMobile ? (
+            <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+              {navLinks.map((link) => 
+                link.isHash ? (
+                  <a key={link.path} href={link.path} onClick={closeMenu} style={linkStyle(false)}>
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link key={link.path} to={link.path} onClick={closeMenu} style={linkStyle(isActive(link.path))}>
+                    {link.label}
+                  </Link>
+                )
+              )}
+            </div>
+          ) : null}
+
           <button
-            onClick={() => setIsOpen((prev) => !prev)}
-            aria-label="Toggle menu"
+            onClick={onToggleTheme}
+            aria-label="Toggle light and dark mode"
             style={{
+              display: 'inline-flex',
+              alignItems: 'center',
               background: 'transparent',
-              border: '1px solid rgba(107,114,128,0.4)',
-              borderRadius: '8px',
-              padding: '6px 10px',
-              color: scrolled ? '#111827' : 'white',
+              border: '1px solid var(--nav-border)',
+              borderRadius: '999px',
+              padding: '8px 10px',
+              color: 'var(--nav-text)',
               cursor: 'pointer'
             }}
           >
-            {isOpen ? '✕' : '☰'}
+            <span>{theme === 'dark' ? '☀️' : '🌙'}</span>
           </button>
-        )}
+
+          {isMobile ? (
+            <button
+              onClick={() => setIsOpen((prev) => !prev)}
+              aria-label="Toggle menu"
+              style={{
+                background: 'transparent',
+                border: '1px solid var(--nav-border)',
+                borderRadius: '8px',
+                padding: '6px 10px',
+                color: 'var(--nav-text)',
+                cursor: 'pointer'
+              }}
+            >
+              {isOpen ? '✕' : '☰'}
+            </button>
+          ) : null}
+        </div>
       </div>
 
       {isMobile && isOpen && (
         <div style={{
-          borderTop: scrolled ? '1px solid rgba(229, 231, 235, 0.3)' : '1px solid rgba(255,255,255,0.15)',
-          backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.75)' : 'rgba(255, 255, 255, 0.12)',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
+          borderTop: '1px solid var(--nav-border)',
+          backgroundColor: 'var(--nav-bg)',
           padding: '10px 16px 14px'
         }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
