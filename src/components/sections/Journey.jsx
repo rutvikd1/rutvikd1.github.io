@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Journey = () => {
   const navigate = useNavigate();
+  const [isExpanded, setIsExpanded] = useState(false);
   const handleMilestoneClick = (link) => {
     if (!link) {
       return;
@@ -74,6 +75,8 @@ const Journey = () => {
     }
   ];
 
+  const visibleMilestones = isExpanded ? milestones : milestones.slice(0, 3);
+
   return (
     <section id="journey" style={{
       padding: '100px 20px',
@@ -144,7 +147,7 @@ const Journey = () => {
           }} />
 
           {/* Timeline items */}
-          {milestones.map((milestone, index) => (
+          {visibleMilestones.map((milestone, index) => (
             <div
               key={index}
               style={{
@@ -374,6 +377,62 @@ const Journey = () => {
               )}
             </div>
           ))}
+
+          {!isExpanded && milestones.length > 3 && (
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '12px', position: 'relative', zIndex: 20 }}>
+              <button
+                type="button"
+                onClick={() => setIsExpanded(true)}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  padding: '14px 24px',
+                  borderRadius: '14px',
+                  border: '1px solid var(--border-color)',
+                  backgroundColor: 'var(--surface-bg)',
+                  color: 'var(--text-primary)',
+                  fontSize: '14px',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  boxShadow: 'var(--card-shadow)',
+                  transition: 'all 0.25s ease',
+                  position: 'relative',
+                  zIndex: 21
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.borderColor = '#2563eb';
+                  e.currentTarget.style.boxShadow = '0 10px 24px rgba(37, 99, 235, 0.18)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.borderColor = 'var(--border-color)';
+                  e.currentTarget.style.boxShadow = 'var(--card-shadow)';
+                }}
+                aria-label="Show more journey milestones"
+              >
+                <span>Show more</span>
+                <span
+                  aria-hidden="true"
+                  style={{
+                    width: '20px',
+                    height: '20px',
+                    borderRadius: '50%',
+                    border: '1px solid currentColor',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '12px',
+                    lineHeight: 1,
+                    fontWeight: 900
+                  }}
+                >
+                  ▾
+                </span>
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
