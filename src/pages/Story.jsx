@@ -133,7 +133,6 @@ const achievements = [
     accent: '#14b8a6',
   },
 ];
-
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const lerp = (from, to, value) => from + (to - from) * value;
 const easeOutCubic = (value) => 1 - Math.pow(1 - value, 3);
@@ -200,6 +199,7 @@ const Story = () => {
   const [activeSection, setActiveSection] = useState(storySections[0].id);
   const [assemblyProgress, setAssemblyProgress] = useState(0);
   const [simulationProgress, setSimulationProgress] = useState(0);
+  const [isWebsitePreviewHovered, setIsWebsitePreviewHovered] = useState(false);
   const assemblyRef = useRef(null);
   const simulationRef = useRef(null);
 
@@ -239,7 +239,7 @@ const Story = () => {
 
   return (
     <div style={{ backgroundColor: 'var(--page-bg)', color: 'var(--text-primary)' }}>
-      <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '80px 20px 40px' }}>
+      <section style={{ maxWidth: '1440px', margin: '0 auto', padding: '80px 20px 40px', display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(620px, 760px)', gap: '24px', alignItems: 'start' }}>
         <div style={{ maxWidth: '860px' }}>
           <p style={{ margin: '0 0 12px', letterSpacing: '0.18em', textTransform: 'uppercase', fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 800 }}>
             Formula Student scrollytelling
@@ -272,12 +272,70 @@ const Story = () => {
             ))}
           </div>
         </div>
+
+        <aside style={{ position: 'sticky', top: '106px' }}>
+          <div
+            style={{ borderRadius: '24px', overflow: 'hidden', border: '1px solid var(--border-color)', boxShadow: 'var(--card-shadow)', backgroundColor: 'var(--surface-bg)', position: 'relative' }}
+            onMouseEnter={() => setIsWebsitePreviewHovered(true)}
+            onMouseLeave={() => setIsWebsitePreviewHovered(false)}
+          >
+            <div style={{ aspectRatio: '16 / 9', width: '100%', minHeight: '480px', backgroundColor: '#ffffff', position: 'relative', overflow: 'hidden' }}>
+              <iframe
+                title="Veloce Racing Homepage"
+                src="https://veloceracing.in/"
+                style={{ width: '100%', height: '100%', border: 0, overflow: 'hidden' }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                scrolling="no"
+              />
+
+              <a
+                href="https://veloceracing.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Check out the team's website here"
+                style={{ position: 'absolute', inset: 0, textDecoration: 'none', zIndex: 2 }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: isWebsitePreviewHovered
+                      ? 'radial-gradient(circle at center, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.78) 74%)'
+                      : 'radial-gradient(circle at center, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.15) 75%)',
+                    transition: 'background 0.25s ease',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '20px',
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: 'clamp(20px, 2.4vw, 30px)',
+                      fontWeight: 800,
+                      color: '#ffffff',
+                      letterSpacing: '0.02em',
+                      textAlign: 'center',
+                      opacity: isWebsitePreviewHovered ? 1 : 0,
+                      transform: isWebsitePreviewHovered ? 'translateY(0)' : 'translateY(8px)',
+                      transition: 'opacity 0.25s ease, transform 0.25s ease',
+                      textShadow: '0 2px 10px rgba(0,0,0,0.45)',
+                    }}
+                  >
+                    Check out the team&apos;s website here!
+                  </span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </aside>
       </section>
 
       <section
         data-story-section="beginning"
         className="story-page-split"
-        style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px 20px 84px', display: 'grid', gridTemplateColumns: 'minmax(0, 1.15fr) minmax(320px, 0.85fr)', gap: '28px', alignItems: 'start' }}
+        style={{ maxWidth: '1440px', margin: '0 auto', padding: '16px 20px 84px', display: 'grid', gridTemplateColumns: 'minmax(0, 1.15fr) minmax(320px, 0.85fr)', gap: '28px', alignItems: 'start' }}
       >
         <div>
           <div style={{ padding: '10px 0 22px' }}>
@@ -607,31 +665,48 @@ const Story = () => {
               href="https://veloceracing.in/"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ padding: '12px 24px', borderRadius: '999px', border: '1px solid var(--border-color)', backgroundColor: 'transparent', color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 700, fontSize: '14px', transition: 'all 0.3s ease', cursor: 'pointer' }}
+              style={{ padding: '12px 24px', borderRadius: '999px', border: '1px solid var(--border-color)', backgroundColor: 'transparent', color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 700, fontSize: '14px', transition: 'all 0.3s ease', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
               onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--surface-bg)'; e.currentTarget.style.borderColor = 'var(--text-primary)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.borderColor = 'var(--border-color)'; }}
             >
-              🌐 Website
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
+                <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
+                <path d="M3 12h18" stroke="currentColor" strokeWidth="1.8" />
+                <path d="M12 3c2.8 2.5 4.2 5.5 4.2 9S14.8 18.5 12 21" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                <path d="M12 3c-2.8 2.5-4.2 5.5-4.2 9S9.2 18.5 12 21" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              </svg>
+              <span>Website</span>
             </a>
             <a 
               href="https://www.instagram.com/veloce_racing_india/"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ padding: '12px 24px', borderRadius: '999px', border: '1px solid var(--border-color)', backgroundColor: 'transparent', color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 700, fontSize: '14px', transition: 'all 0.3s ease', cursor: 'pointer' }}
+              style={{ padding: '12px 24px', borderRadius: '999px', border: '1px solid var(--border-color)', backgroundColor: 'transparent', color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 700, fontSize: '14px', transition: 'all 0.3s ease', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
               onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--surface-bg)'; e.currentTarget.style.borderColor = 'var(--text-primary)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.borderColor = 'var(--border-color)'; }}
             >
-              📸 Instagram
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
+                <rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="1.8" />
+                <circle cx="12" cy="12" r="3.7" stroke="currentColor" strokeWidth="1.8" />
+                <circle cx="17.2" cy="6.8" r="1" fill="currentColor" />
+              </svg>
+              <span>Instagram</span>
             </a>
             <a 
               href="https://in.linkedin.com/company/team-veloce-racing"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ padding: '12px 24px', borderRadius: '999px', border: '1px solid var(--border-color)', backgroundColor: 'transparent', color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 700, fontSize: '14px', transition: 'all 0.3s ease', cursor: 'pointer' }}
+              style={{ padding: '12px 24px', borderRadius: '999px', border: '1px solid var(--border-color)', backgroundColor: 'transparent', color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 700, fontSize: '14px', transition: 'all 0.3s ease', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
               onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--surface-bg)'; e.currentTarget.style.borderColor = 'var(--text-primary)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.borderColor = 'var(--border-color)'; }}
             >
-              💼 LinkedIn
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
+                <rect x="3.5" y="3.5" width="17" height="17" rx="3" stroke="currentColor" strokeWidth="1.8" />
+                <path d="M8.2 10.5V16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                <circle cx="8.2" cy="8" r="1" fill="currentColor" />
+                <path d="M12.1 16v-3.1c0-1.2.8-2 1.9-2s1.8.8 1.8 2V16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <span>LinkedIn</span>
             </a>
           </div>
         </div>

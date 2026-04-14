@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Story from './pages/Story';
@@ -7,6 +7,16 @@ import Resume from './pages/Resume';
 import NuclearLocalization from './pages/projects/NuclearLocalization';
 import TreeDetectionProject from './pages/projects/TreeDetectionProject';
 import './App.css';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [pathname]);
+
+  return null;
+}
 
 function App() {
   const [theme, setTheme] = useState(() => {
@@ -60,6 +70,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <Navbar theme={theme} onToggleTheme={toggleTheme} />
       <main style={{ minHeight: '100vh', backgroundColor: 'var(--page-bg)', color: 'var(--text-primary)' }}>
       <Routes>
