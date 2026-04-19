@@ -74,45 +74,101 @@ const Hero = () => {
       justifyContent: 'center',
       width: '100%'
     }}>
-      {/* Animated background elements */}
-      <div style={{
-        position: 'absolute',
-        top: '-50%',
-        right: '-10%',
-        width: '500px',
-        height: '500px',
-        background: 'radial-gradient(circle, var(--hero-glow-1) 0%, transparent 70%)',
-        borderRadius: '50%',
-        filter: 'blur(40px)',
-        animation: 'float 6s ease-in-out infinite'
-      }} />
-
-      <div style={{
-        position: 'absolute',
-        bottom: '-40%',
-        left: '-5%',
-        width: '400px',
-        height: '400px',
-        background: 'radial-gradient(circle, var(--hero-glow-2) 0%, transparent 70%)',
-        borderRadius: '50%',
-        filter: 'blur(40px)',
-        animation: 'float 8s ease-in-out infinite reverse'
-      }} />
-
-      {/* Grid pattern */}
+      {/* Sensor spotlight */}
       <div style={{
         position: 'absolute',
         inset: 0,
-        backgroundImage: 'linear-gradient(rgba(148, 163, 184, 0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.22) 1px, transparent 1px)',
-        backgroundSize: '50px 50px',
-        opacity: 0.3,
+        background: `radial-gradient(380px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(56, 189, 248, 0.05) 0%, rgba(56, 189, 248, 0) 60%)`,
+        transition: 'background 0.2s ease-out',
+        pointerEvents: 'none'
+      }} />
+
+      {/* Ambient wash */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        pointerEvents: 'none',
+        background: 'linear-gradient(155deg, rgba(15, 23, 42, 0.08) 0%, rgba(15, 23, 42, 0) 40%), linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 32%)'
+      }} />
+
+      {/* Dot matrix */}
+      <div style={{
+        position: 'absolute',
+        inset: '-6% -12%',
+        backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.38) 1px, transparent 0)',
+        backgroundSize: '28px 28px',
+        opacity: 0.16,
+        transform: 'rotate(-8deg)',
+        pointerEvents: 'none'
+      }} />
+
+      {/* Scan lines */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        backgroundImage: 'repeating-linear-gradient(118deg, rgba(56, 189, 248, 0.08) 0, rgba(56, 189, 248, 0.08) 1px, transparent 1px, transparent 76px)',
+        opacity: 0.34,
+        pointerEvents: 'none'
+      }} />
+
+      {/* Orbital motif */}
+      <div style={{
+        position: 'absolute',
+        width: '380px',
+        height: '380px',
+        borderRadius: '50%',
+        border: '1px solid rgba(56, 189, 248, 0.24)',
+        right: '-120px',
+        top: '40px',
+        opacity: 0.55,
+        animation: 'spinSlow 28s linear infinite',
+        pointerEvents: 'none'
+      }} />
+      <div style={{
+        position: 'absolute',
+        width: '220px',
+        height: '220px',
+        borderRadius: '50%',
+        border: '1px dashed rgba(14, 165, 233, 0.28)',
+        right: '40px',
+        top: '120px',
+        opacity: 0.65,
+        animation: 'spinSlow 22s linear infinite reverse',
+        pointerEvents: 'none'
+      }} />
+      <div style={{
+        position: 'absolute',
+        width: '10px',
+        height: '10px',
+        borderRadius: '50%',
+        backgroundColor: 'rgba(34, 211, 238, 0.9)',
+        boxShadow: '0 0 0 6px rgba(34, 211, 238, 0.18)',
+        right: '148px',
+        top: '88px',
+        animation: 'pulseNode 2.4s ease-in-out infinite',
+        pointerEvents: 'none'
+      }} />
+      <div style={{
+        position: 'absolute',
+        width: '8px',
+        height: '8px',
+        borderRadius: '50%',
+        backgroundColor: 'rgba(56, 189, 248, 0.85)',
+        boxShadow: '0 0 0 5px rgba(56, 189, 248, 0.18)',
+        left: '14%',
+        bottom: '18%',
+        animation: 'pulseNode 2.8s ease-in-out infinite 0.4s',
         pointerEvents: 'none'
       }} />
 
       <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(30px); }
+        @keyframes spinSlow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes pulseNode {
+          0%, 100% { transform: scale(1); opacity: 0.85; }
+          50% { transform: scale(1.18); opacity: 1; }
         }
         @keyframes slideInUp {
           from {

@@ -3,16 +3,51 @@ html, body, #root {
   min-height: 100%;
 }
 
+:root {
+  --mesh-gradient:
+    radial-gradient(44% 36% at 8% 12%, rgba(56, 189, 248, 0.22) 0%, rgba(56, 189, 248, 0) 70%),
+    radial-gradient(36% 32% at 88% 8%, rgba(59, 130, 246, 0.18) 0%, rgba(59, 130, 246, 0) 72%),
+    radial-gradient(38% 34% at 72% 86%, rgba(14, 165, 233, 0.16) 0%, rgba(14, 165, 233, 0) 74%),
+    radial-gradient(42% 38% at 18% 84%, rgba(125, 211, 252, 0.2) 0%, rgba(125, 211, 252, 0) 76%);
+  --mesh-opacity: 0.9;
+  --mesh-blur: 8px;
+}
+
 body {
   margin: 0;
   background: #f8fafc;
   overflow-x: hidden;
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.015em;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--mesh-gradient);
+  opacity: var(--mesh-opacity);
+  filter: blur(var(--mesh-blur));
+  transform: translateZ(0);
 }
 
 #root {
   margin: 0;
   padding: 0;
   text-align: left;
+  position: relative;
+  z-index: 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 .logo {
@@ -49,4 +84,10 @@ body {
 
 .read-the-docs {
   color: #888;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    filter: none;
+  }
 }

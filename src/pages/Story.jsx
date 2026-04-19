@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const storySections = [
   {
@@ -8,85 +8,16 @@ const storySections = [
     teaser: 'Joining Formula Student and learning how a race car is truly built from the ground up.',
   },
   {
-    id: 'cad',
-    label: '02',
-    title: 'New CAD Designs',
-    teaser: 'Turning ideas into parts, packaging them tightly, and designing for manufacturability.',
-  },
-  {
-    id: 'assembly',
-    label: '03',
-    title: 'Assembly in Motion',
-    teaser: 'Watching individual CAD parts come together into one assembly as you scroll.',
-  },
-  {
     id: 'simulations',
-    label: '04',
+    label: '02',
     title: 'Simulations',
     teaser: 'A set of visual checkpoints showing structural, mechanical, and performance analysis.',
   },
   {
     id: 'achievements',
-    label: '05',
+    label: '03',
     title: 'Achievements',
     teaser: 'What the Formula Student journey added to the team and to my own practice.',
-  },
-];
-
-const assemblyParts = [
-  {
-    name: 'Chassis',
-    note: 'Main frame',
-    width: 240,
-    height: 92,
-    from: { x: -240, y: 120, rotate: -18, scale: 0.88 },
-    to: { x: 0, y: 80, rotate: 0, scale: 1 },
-    color: '#111827',
-  },
-  {
-    name: 'Front Wing',
-    note: 'Aerodynamic element',
-    width: 178,
-    height: 48,
-    from: { x: 220, y: -170, rotate: 16, scale: 0.84 },
-    to: { x: 0, y: -116, rotate: 0, scale: 1 },
-    color: '#0f766e',
-  },
-  {
-    name: 'Rear Wing',
-    note: 'Downforce package',
-    width: 168,
-    height: 48,
-    from: { x: 250, y: 140, rotate: 15, scale: 0.86 },
-    to: { x: 0, y: 130, rotate: 0, scale: 1 },
-    color: '#7c3aed',
-  },
-  {
-    name: 'Suspension',
-    note: 'Corner package',
-    width: 134,
-    height: 76,
-    from: { x: -230, y: -120, rotate: -22, scale: 0.82 },
-    to: { x: -118, y: -8, rotate: 0, scale: 1 },
-    color: '#2563eb',
-  },
-  {
-    name: 'Upright',
-    note: 'Wheel interface',
-    width: 112,
-    height: 68,
-    from: { x: -60, y: 220, rotate: -18, scale: 0.8 },
-    to: { x: 120, y: 18, rotate: 0, scale: 1 },
-    color: '#ea580c',
-  },
-  {
-    name: 'Driver Cell',
-    note: 'Cockpit & controls',
-    width: 150,
-    height: 82,
-    from: { x: 260, y: 0, rotate: 12, scale: 0.84 },
-    to: { x: 18, y: 0, rotate: 0, scale: 1 },
-    color: '#14b8a6',
   },
 ];
 
@@ -114,7 +45,7 @@ const simulationPatches = [
 const achievements = [
   {
     title: 'Designed cleaner assemblies',
-    description: 'The CAD process taught me how to turn disconnected parts into a packaged and maintainable system.',
+    description: 'The design process taught me how to turn disconnected parts into a packaged and maintainable system.',
     accent: '#2563eb',
   },
   {
@@ -134,7 +65,6 @@ const achievements = [
   },
 ];
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
-const lerp = (from, to, value) => from + (to - from) * value;
 const easeOutCubic = (value) => 1 - Math.pow(1 - value, 3);
 
 const computeScrollProgress = (element) => {
@@ -197,10 +127,9 @@ const StoryPatchStrip = ({ title, eyebrow, cards }) => (
 
 const Story = () => {
   const [activeSection, setActiveSection] = useState(storySections[0].id);
-  const [assemblyProgress, setAssemblyProgress] = useState(0);
   const [simulationProgress, setSimulationProgress] = useState(0);
   const [isWebsitePreviewHovered, setIsWebsitePreviewHovered] = useState(false);
-  const assemblyRef = useRef(null);
+  const [isWebsiteIconHovered, setIsWebsiteIconHovered] = useState(false);
   const simulationRef = useRef(null);
 
   useEffect(() => {
@@ -218,7 +147,6 @@ const Story = () => {
     document.querySelectorAll('[data-story-section]').forEach((element) => observer.observe(element));
 
     const updateProgress = () => {
-      setAssemblyProgress(computeScrollProgress(assemblyRef.current));
       setSimulationProgress(computeScrollProgress(simulationRef.current));
     };
 
@@ -234,7 +162,6 @@ const Story = () => {
   }, []);
 
   const activeSectionData = storySections.find((section) => section.id === activeSection) || storySections[0];
-  const assemblyEase = easeOutCubic(assemblyProgress);
   const simulationEase = easeOutCubic(simulationProgress);
 
   return (
@@ -248,7 +175,7 @@ const Story = () => {
             From first sketch to assembled car.
           </h1>
           <p style={{ fontSize: '18px', lineHeight: 1.8, color: 'var(--text-secondary)', margin: 0, maxWidth: '760px' }}>
-            This page turns your Formula Student undergraduate experience into a scroll-driven narrative: the beginning, CAD design work, animated assembly, simulation images, and a closing achievements section.
+            This page turns your Formula Student undergraduate experience into a scroll-driven narrative: the beginning, design iterations, simulation images, and a closing achievements section.
           </p>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '26px' }}>
@@ -283,49 +210,85 @@ const Story = () => {
               <iframe
                 title="Veloce Racing Homepage"
                 src="https://veloceracing.in/"
-                style={{ width: '100%', height: '100%', border: 0, overflow: 'hidden' }}
+                style={{ width: 'calc(100% + 24px)', height: 'calc(100% + 24px)', border: 0, marginRight: '-24px', marginBottom: '-24px' }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                scrolling="no"
+                scrolling="yes"
+              />
+
+              <div
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  top: '-66px',
+                  right: '-66px',
+                  width: '220px',
+                  height: '220px',
+                  borderRadius: '999px',
+                  pointerEvents: 'none',
+                  background: 'radial-gradient(circle, rgba(15, 23, 42, 0.34) 0%, rgba(15, 23, 42, 0.2) 32%, rgba(15, 23, 42, 0) 72%)',
+                  opacity: isWebsitePreviewHovered ? 1 : 0,
+                  transition: 'opacity 0.22s ease',
+                  zIndex: 2,
+                }}
               />
 
               <a
                 href="https://veloceracing.in/"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Check out the team's website here"
-                style={{ position: 'absolute', inset: 0, textDecoration: 'none', zIndex: 2 }}
+                aria-label="Open team website in a new tab"
+                onMouseEnter={() => setIsWebsiteIconHovered(true)}
+                onMouseLeave={() => setIsWebsiteIconHovered(false)}
+                style={{
+                  position: 'absolute',
+                  top: '12px',
+                  right: '12px',
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '999px',
+                  border: 'none',
+                  backgroundColor: 'transparent',
+                  color: '#ffffff',
+                  textDecoration: 'none',
+                  zIndex: 3,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: isWebsitePreviewHovered ? '0 12px 24px rgba(15, 23, 42, 0.24)' : '0 8px 16px rgba(15, 23, 42, 0.14)',
+                  backdropFilter: 'blur(4px)',
+                  opacity: isWebsitePreviewHovered ? 1 : 0,
+                  transform: isWebsitePreviewHovered ? 'translateY(0) scale(1)' : 'translateY(-4px) scale(0.9)',
+                  transition: 'opacity 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease',
+                }}
               >
-                <div
+                <span
                   style={{
                     position: 'absolute',
-                    inset: 0,
-                    background: isWebsitePreviewHovered
-                      ? 'radial-gradient(circle at center, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.78) 74%)'
-                      : 'radial-gradient(circle at center, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.15) 75%)',
-                    transition: 'background 0.25s ease',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '20px',
+                    top: '50%',
+                    right: '48px',
+                    transform: isWebsiteIconHovered ? 'translateY(-50%) translateX(0)' : 'translateY(-50%) translateX(8px)',
+                    opacity: isWebsiteIconHovered ? 1 : 0,
+                    pointerEvents: 'none',
+                    padding: '8px 12px',
+                    borderRadius: '999px',
+                    backgroundColor: 'rgba(15, 23, 42, 0.88)',
+                    color: '#ffffff',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    letterSpacing: '0.01em',
+                    whiteSpace: 'nowrap',
+                    boxShadow: '0 12px 24px rgba(15, 23, 42, 0.22)',
+                    transition: 'opacity 0.18s ease, transform 0.18s ease',
                   }}
                 >
-                  <span
-                    style={{
-                      fontSize: 'clamp(20px, 2.4vw, 30px)',
-                      fontWeight: 800,
-                      color: '#ffffff',
-                      letterSpacing: '0.02em',
-                      textAlign: 'center',
-                      opacity: isWebsitePreviewHovered ? 1 : 0,
-                      transform: isWebsitePreviewHovered ? 'translateY(0)' : 'translateY(8px)',
-                      transition: 'opacity 0.25s ease, transform 0.25s ease',
-                      textShadow: '0 2px 10px rgba(0,0,0,0.45)',
-                    }}
-                  >
-                    Check out the team&apos;s website here!
-                  </span>
-                </div>
+                  Visit the team&apos;s website
+                </span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M14 4h6v6" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M10 14L20 4" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M20 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h4" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </a>
             </div>
           </div>
@@ -353,7 +316,7 @@ const Story = () => {
           <div style={{ display: 'grid', gap: '16px', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))' }}>
             {[
               { title: 'Team setup', subtitle: 'The garage, the tasks, the rhythm', accent: '#2563eb' },
-              { title: 'First sketches', subtitle: 'Ideas moving from paper to CAD', accent: '#7c3aed' },
+              { title: 'First sketches', subtitle: 'Ideas moving from paper to design', accent: '#7c3aed' },
               { title: 'Initial feedback', subtitle: 'Design reviews and iteration', accent: '#0ea5e9' },
             ].map((card) => (
               <div key={card.title} style={{ minHeight: '180px', borderRadius: '20px', overflow: 'hidden', border: '1px solid var(--border-color)', boxShadow: 'var(--card-shadow)', background: `linear-gradient(135deg, ${card.accent}22, ${card.accent}08)` }}>
@@ -419,113 +382,10 @@ const Story = () => {
         title="Patches of the workshop and design process"
         cards={[
           { title: 'Garage note', subtitle: 'Add a photo patch here', accent: '#2563eb', size: 'wide' },
-          { title: 'CAD sketch', subtitle: 'Drop in a design capture', accent: '#7c3aed', size: 'tall' },
+          { title: 'Design sketch', subtitle: 'Drop in a design capture', accent: '#7c3aed', size: 'tall' },
           { title: 'Build log', subtitle: 'Use this space for a project image', accent: '#0ea5e9', size: 'wide' },
         ]}
       />
-
-      <section
-        data-story-section="cad"
-        ref={assemblyRef}
-        className="story-page-split"
-        style={{ maxWidth: '1200px', margin: '0 auto', padding: '8px 20px 90px', display: 'grid', gridTemplateColumns: 'minmax(0, 0.95fr) minmax(340px, 1.05fr)', gap: '28px', alignItems: 'start' }}
-      >
-        <div>
-          <p style={{ margin: '0 0 10px', fontSize: '12px', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#7c3aed' }}>
-            Chapter 02
-          </p>
-          <h2 style={{ fontSize: 'clamp(32px, 5vw, 54px)', lineHeight: 1.04, margin: '0 0 12px' }}>
-            New CAD designs
-          </h2>
-          <p style={{ fontSize: '18px', lineHeight: 1.8, color: 'var(--text-secondary)', margin: '0 0 22px', maxWidth: '640px' }}>
-            This part of the story can show the new CAD work you completed during Formula Student: the individual parts, the packaging decisions, and how they were refined before assembly.
-          </p>
-          <div style={{ display: 'grid', gap: '14px' }}>
-            {[
-              'Iterated parts for packaging and fit',
-              'Balanced manufacturability with performance',
-              'Kept the design modular for build and repair',
-            ].map((item) => (
-              <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '12px 14px', borderRadius: '16px', backgroundColor: 'var(--surface-bg)', border: '1px solid var(--border-color)', boxShadow: 'var(--card-shadow)' }}>
-                <span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#7c3aed' }} />
-                <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div style={{ position: 'sticky', top: '106px' }}>
-          <div style={{ borderRadius: '28px', padding: '22px', background: 'var(--surface-bg)', border: '1px solid var(--border-color)', boxShadow: 'var(--card-shadow)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <div>
-                <p style={{ margin: '0 0 6px', fontSize: '12px', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>
-                  Exploded to assembled
-                </p>
-                <h3 style={{ margin: 0, fontSize: '24px', lineHeight: 1.08 }}>Assembly animation</h3>
-              </div>
-              <div style={{ textAlign: 'right' }}>
-                <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>
-                  Progress
-                </div>
-                <div style={{ fontSize: '24px', fontWeight: 900, color: '#7c3aed' }}>{Math.round(assemblyEase * 100)}%</div>
-              </div>
-            </div>
-
-            <div style={{ position: 'relative', height: '520px', borderRadius: '24px', overflow: 'hidden', background: 'linear-gradient(180deg, rgba(15,23,42,0.04), rgba(255,255,255,0.5))', border: '1px solid var(--border-color)' }}>
-              <div style={{ position: 'absolute', inset: '18% 10% 20%', borderRadius: '28px', border: '1px dashed var(--border-color)', background: 'radial-gradient(circle at center, rgba(124,58,237,0.05), transparent 50%)' }} />
-              <div style={{ position: 'absolute', left: '50%', top: '50%', width: '180px', height: '64px', transform: 'translate(-50%, -50%)', borderRadius: '20px', background: 'linear-gradient(135deg, rgba(17,24,39,0.92), rgba(30,41,59,0.88))', boxShadow: '0 18px 40px rgba(0,0,0,0.18)' }} />
-              <div style={{ position: 'absolute', left: '50%', top: '50%', width: '120px', height: '28px', transform: 'translate(-50%, -50%) translateY(8px)', borderRadius: '999px', backgroundColor: 'rgba(255,255,255,0.18)', border: '1px solid rgba(255,255,255,0.12)' }} />
-              {assemblyParts.map((part) => {
-                const x = lerp(part.from.x, part.to.x, assemblyEase);
-                const y = lerp(part.from.y, part.to.y, assemblyEase);
-                const rotate = lerp(part.from.rotate, part.to.rotate, assemblyEase);
-                const scale = lerp(part.from.scale, part.to.scale, assemblyEase);
-                const opacity = clamp((assemblyEase - 0.08) / 0.16, 0, 1);
-
-                return (
-                  <div
-                    key={part.name}
-                    style={{
-                      position: 'absolute',
-                      left: '50%',
-                      top: '50%',
-                      width: `${part.width}px`,
-                      height: `${part.height}px`,
-                      transform: `translate(-50%, -50%) translate(${x}px, ${y}px) rotate(${rotate}deg) scale(${scale})`,
-                      opacity,
-                      borderRadius: '18px',
-                      background: `linear-gradient(135deg, ${part.color}, rgba(255,255,255,0.1))`,
-                      boxShadow: '0 16px 32px rgba(0, 0, 0, 0.12)',
-                      border: '1px solid rgba(255,255,255,0.16)',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      color: 'white',
-                      fontWeight: 800,
-                      textAlign: 'center',
-                      padding: '12px',
-                      backdropFilter: 'blur(6px)'
-                    }}
-                  >
-                    <span style={{ fontSize: '14px' }}>{part.name}</span>
-                    <span style={{ fontSize: '11px', fontWeight: 600, opacity: 0.82, marginTop: '4px' }}>{part.note}</span>
-                  </div>
-                );
-              })}
-            </div>
-
-            <div style={{ marginTop: '16px', display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '12px' }}>
-              {assemblyParts.slice(0, 3).map((part) => (
-                <div key={part.name} style={{ padding: '12px', borderRadius: '16px', backgroundColor: 'rgba(124,58,237,0.06)', border: '1px solid var(--border-color)' }}>
-                  <div style={{ fontSize: '13px', fontWeight: 800, marginBottom: '4px' }}>{part.name}</div>
-                  <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{part.note}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       <StoryPatchStrip
         eyebrow="Image patches"
@@ -541,7 +401,7 @@ const Story = () => {
       >
         <div>
           <p style={{ margin: '0 0 10px', fontSize: '12px', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#0ea5e9' }}>
-            Chapter 04
+            Chapter 02
           </p>
           <h2 style={{ fontSize: 'clamp(32px, 5vw, 54px)', lineHeight: 1.04, margin: '0 0 12px' }}>
             Simulations and validation
@@ -622,7 +482,7 @@ const Story = () => {
       >
         <div style={{ maxWidth: '820px', marginBottom: '28px' }}>
           <p style={{ margin: '0 0 10px', fontSize: '12px', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#14b8a6' }}>
-            Chapter 05
+            Chapter 03
           </p>
           <h2 style={{ fontSize: 'clamp(32px, 5vw, 54px)', lineHeight: 1.04, margin: '0 0 12px' }}>
             Achievements

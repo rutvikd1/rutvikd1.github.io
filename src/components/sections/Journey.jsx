@@ -49,7 +49,7 @@ const Journey = () => {
       year: 'July 2022',
       title: 'B. Tech in Production Engineering',
       description: 'Completed undergraduate studies with a focus on manufacturing processes and automation.',
-      tag: 'Achievement',
+      tag: 'Milestone',
       location: 'Pune, India',
       icon: '⚛️',
       color: '#06b6d4'
