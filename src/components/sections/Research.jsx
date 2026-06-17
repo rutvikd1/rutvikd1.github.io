@@ -4,6 +4,15 @@ import ProjectCard from './ProjectCard';
 const Research = () => {
   const projects = [
     {
+      title: "Object Detection with SSD",
+      description: "A computer vision project using SSD with a 7-layer backbone to detect objects in real time, with an animated inference preview on the tile.",
+      techStack: ["Python", "Tensorflow", "SSD", "Object Detection"],
+      projectLink: "https://github.com/rutvikd1/Object-Detection",
+      image: "https://raw.githubusercontent.com/rutvikd1/Object-Detection/main/experiments/ssd-7layers/inference/output.gif",
+      icon: "🤖",
+      ctaLabel: "Open GitHub Repo"
+    },
+    {
       title: "Fallen Tree Detection via Drone",
       description: "A deep learning pipeline processing orthomosaic drone images to detect fallen trees with 94%+ accuracy.",
       techStack: ["Python", "DeepLabV3+", "Computer Vision", "OpenCV"],
@@ -16,6 +25,14 @@ const Research = () => {
       techStack: ["C++", "ROS", "Sensor Fusion", "Math Modeling"],
       projectLink: "/projects/nuclear-localization",
       icon: "⚛️"
+    },
+    {
+      title: "RF Localization",
+      description: "Radio-frequency source localization and mapping using a drone-mounted payload.",
+      techStack: ["C++", "ROS", "Localization", "Robotics"],
+      projectLink: "https://github.com/rutvikd1/RF_localization",
+      image: "https://raw.githubusercontent.com/rutvikd1/RF_localization/main/images/Drone_with_payload.jpeg",
+      ctaLabel: "Open GitHub Repo"
     },
     {
       title: "Formula Student Vehicle Dynamics",
@@ -73,6 +90,8 @@ const Research = () => {
             techStack={proj.techStack}
             projectLink={proj.projectLink}
             icon={proj.icon}
+            image={proj.image}
+            ctaLabel={proj.ctaLabel}
           />
         ))}
       </div>
