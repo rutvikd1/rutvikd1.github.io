@@ -7,18 +7,12 @@ import 'katex/dist/katex.min.css';
 import figConstellation from '../../assets/report_img-007.png';
 import figRtkSetup from '../../assets/report_img-008.png';
 import figPiConnections from '../../assets/report_img-009.png';
-import figRoverSetup from '../../assets/report_img-011.png';
-import figBaseSetup from '../../assets/report_img-012.png';
-import figNorth from '../../assets/report_img-013.png';
-import figWest from '../../assets/report_img-014.png';
-import figEast from '../../assets/report_img-015.png';
-import figSouth from '../../assets/report_img-016.png';
 import figMeasurements from '../../assets/report_img-018.png';
 import figNoiseOverTime from '../../assets/report_img-019.png';
 import figSkyplotRnmp from '../../assets/report_img-020.png';
 import figSkyplotCno from '../../assets/report_img-021.png';
 import figPolesModel from '../../assets/report_img-022.png';
-import coverImage from '../../assets/report_img-003.png';
+// import coverImage from '../../assets/report_img-003.png';
 
 export const GNSSMultipathAnalysisContent = () => {
   return (
@@ -108,33 +102,6 @@ export const GNSSMultipathAnalysisContent = () => {
           </p>
         </div>
 
-        {/* Figure 4: Rover and Base setup */}
-        <div className="my-8 grid grid-cols-2 gap-4 bg-gray-900/5 dark:bg-white/5 p-4 rounded-xl border border-gray-200/50 dark:border-gray-800/50">
-          <div className="text-center">
-            <img src={figRoverSetup} alt="Rover setup at drone park" className="rounded-xl mx-auto object-cover max-h-[180px]" />
-            <span className="text-[11px] block mt-1 text-gray-500">Rover Setup</span>
-          </div>
-          <div className="text-center">
-            <img src={figBaseSetup} alt="Base station setup" className="rounded-xl mx-auto object-cover max-h-[180px]" />
-            <span className="text-[11px] block mt-1 text-gray-500">Base Station Setup</span>
-          </div>
-          <p className="col-span-2 text-xs text-center mt-1" style={{ color: 'var(--text-secondary)' }}>
-            Figure 4: Rover module setup at the drone park (left) and Base station setup for RTK (right) (from Page 7).
-          </p>
-        </div>
-
-        {/* Figure 5: Surroundings */}
-        <div className="my-8 bg-gray-900/5 dark:bg-white/5 p-4 rounded-xl border border-gray-200/50 dark:border-gray-800/50">
-          <div className="grid grid-cols-2 gap-2 max-w-md mx-auto">
-            <img src={figNorth} alt="Facing North" className="rounded object-cover h-[90px] w-full" />
-            <img src={figWest} alt="Facing West" className="rounded object-cover h-[90px] w-full" />
-            <img src={figEast} alt="Facing East" className="rounded object-cover h-[90px] w-full" />
-            <img src={figSouth} alt="Facing South" className="rounded object-cover h-[90px] w-full" />
-          </div>
-          <p className="text-xs text-center mt-2" style={{ color: 'var(--text-secondary)' }}>
-            Figure 5: Images representing surroundings of the GPS receiver. Top: North, Middle Left: West, Middle Right: East, Bottom: South (from Page 8).
-          </p>
-        </div>
       </section>
 
       {/* 5. Mathematical Models */}
@@ -262,7 +229,7 @@ const GNSSMultipathAnalysis = () => {
       title="GNSS Multipath Error Analysis for an RTK GPS System"
       subtitle="Quantifying and locating structural sources of receiver noise and multipath error at the Virginia Tech drone park using carrier-phase differential GPS."
       techStack={techStack}
-      image={coverImage}
+      // image={coverImage}
       githubLink="https://github.com/rutvikd1"
     >
       <GNSSMultipathAnalysisContent />
