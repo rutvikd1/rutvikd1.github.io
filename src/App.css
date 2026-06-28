@@ -4,6 +4,8 @@ html, body, #root {
 }
 
 :root {
+  --navbar-height: 0px;
+  --body-bg: #f8fafc;
   --mesh-gradient:
     radial-gradient(44% 36% at 8% 12%, rgba(56, 189, 248, 0.22) 0%, rgba(56, 189, 248, 0) 70%),
     radial-gradient(36% 32% at 88% 8%, rgba(59, 130, 246, 0.18) 0%, rgba(59, 130, 246, 0) 72%),

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const ProjectCard = ({ title, description, icon, techStack, projectLink, image, ctaLabel = 'View Case Study' }) => {
+const ProjectCard = ({ title, description, icon, techStack, projectLink, image, ctaLabel = 'View Case Study', onClick, imageFit = 'cover' }) => {
   const [isHovered, setIsHovered] = useState(false);
   const isExternalLink = typeof projectLink === 'string' && /^https?:\/\//i.test(projectLink);
 
@@ -63,36 +63,66 @@ const ProjectCard = ({ title, description, icon, techStack, projectLink, image, 
       </div>
 
       {image ? (
-        <div style={{ padding: '0 0 18px', display: 'flex' }}>
-          <div style={{
-            position: 'relative',
-            width: '100%',
-            aspectRatio: '16 / 9',
-            overflow: 'hidden',
-            borderRadius: '0',
-            backgroundColor: 'var(--surface-alt)',
-            borderTop: '1px solid var(--border-color)',
-            borderBottom: '1px solid var(--border-color)'
-          }}>
-            <img
-              src={image}
-              alt={title}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                display: 'block',
-                transform: isHovered ? 'scale(1.03)' : 'scale(1)',
-                transition: 'transform 0.35s ease'
-              }}
-            />
+        imageFit === 'contain' ? (
+          <div style={{ padding: '0 24px 18px', display: 'block' }}>
             <div style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(180deg, rgba(15, 23, 42, 0.02) 0%, rgba(15, 23, 42, 0.28) 100%)'
-            }} />
+              position: 'relative',
+              width: '100%',
+              aspectRatio: '16 / 9',
+              overflow: 'hidden',
+              borderRadius: '12px',
+              backgroundColor: 'var(--surface-alt)',
+              border: '1px solid var(--border-color)',
+              boxSizing: 'border-box'
+            }}>
+              <img
+                src={image}
+                alt={title}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  padding: '10px',
+                  display: 'block',
+                  transform: isHovered ? 'scale(1.02)' : 'scale(1)',
+                  transition: 'transform 0.35s ease',
+                  boxSizing: 'border-box'
+                }}
+              />
+            </div>
           </div>
-        </div>
+        ) : (
+          <div style={{ padding: '0 0 18px', display: 'block' }}>
+            <div style={{
+              position: 'relative',
+              width: '100%',
+              aspectRatio: '16 / 9',
+              overflow: 'hidden',
+              borderRadius: '0',
+              backgroundColor: 'var(--surface-alt)',
+              borderTop: '1px solid var(--border-color)',
+              borderBottom: '1px solid var(--border-color)'
+            }}>
+              <img
+                src={image}
+                alt={title}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block',
+                  transform: isHovered ? 'scale(1.03)' : 'scale(1)',
+                  transition: 'transform 0.35s ease'
+                }}
+              />
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(180deg, rgba(15, 23, 42, 0.02) 0%, rgba(15, 23, 42, 0.28) 100%)'
+              }} />
+            </div>
+          </div>
+        )
       ) : null}
 
       <div style={{ padding: image ? '0 24px 24px' : '0 24px 24px', display: 'flex', flexDirection: 'column', flex: 1 }}>
@@ -127,6 +157,14 @@ const ProjectCard = ({ title, description, icon, techStack, projectLink, image, 
       </div>
     </div>
   );
+
+  if (onClick) {
+    return (
+      <div onClick={onClick} style={{ textDecoration: 'none', color: 'inherit' }}>
+        <CardContent />
+      </div>
+    );
+  }
 
   return isExternalLink ? (
     <a href={projectLink} target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>

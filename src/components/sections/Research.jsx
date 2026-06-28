@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProjectCard from './ProjectCard';
+import ProjectLayout from '../ProjectLayout';
+import { GNSSMultipathAnalysisContent } from '../../pages/projects/GNSSMultipathAnalysis';
+import skyplotsCombined from '../../assets/skyplots_combined.png';
 
 const Research = () => {
+  const [activeProject, setActiveProject] = useState(null);
   const projects = [
     {
       title: "Object Detection with SSD",
@@ -25,6 +29,14 @@ const Research = () => {
       techStack: ["C++", "ROS", "Sensor Fusion", "Math Modeling"],
       projectLink: "/projects/nuclear-localization",
       icon: "⚛️"
+    },
+    {
+      title: "GNSS Multipath Error Analysis",
+      description: "Systematic error analysis and spatial mapping of code-phase multipath and receiver noise at the Virginia Tech drone park.",
+      techStack: ["GNSS/RTK", "Matlab", "Error Modeling", "Data Analysis"],
+      projectLink: "/projects/gnss-multipath-analysis",
+      image: skyplotsCombined,
+      icon: "🛰️"
     },
     {
       title: "RF Localization",
@@ -92,9 +104,25 @@ const Research = () => {
             icon={proj.icon}
             image={proj.image}
             ctaLabel={proj.ctaLabel}
+            imageFit={proj.projectLink === '/projects/gnss-multipath-analysis' ? 'contain' : 'cover'}
+            onClick={proj.projectLink === '/projects/gnss-multipath-analysis' ? () => setActiveProject('gnss-multipath-analysis') : undefined}
           />
         ))}
       </div>
+
+      {/* GNSS Multipath Error Analysis Modal overlay */}
+      <ProjectLayout
+        isModal={true}
+        isOpen={activeProject === 'gnss-multipath-analysis'}
+        onClose={() => setActiveProject(null)}
+        title="GNSS Multipath Error Analysis for an RTK GPS System"
+        subtitle="Quantifying and locating structural sources of receiver noise and multipath error at the Virginia Tech drone park using carrier-phase differential GPS."
+        techStack={["GNSS/RTK", "Matlab", "Error Modeling", "Data Analysis"]}
+        image={skyplotsCombined}
+        githubLink="https://github.com/rutvikd1"
+      >
+        <GNSSMultipathAnalysisContent />
+      </ProjectLayout>
 
       <style>{`
         @media (max-width: 1024px) {

@@ -6,11 +6,11 @@ import Expertise from '../components/sections/Expertise';
 import Research from '../components/sections/Research';
 import Footer from '../components/Footer';
 
-const Home = ({scrollToSection}) => {
+const Home = ({ theme, scrollToSection }) => {
   return (
     <div style={{ backgroundColor: 'var(--page-bg)', color: 'var(--text-primary)' }}>
-      <div style={{ marginTop: '-82px' }}>
-        <Hero />
+      <div style={{ marginTop: 'calc(-1 * var(--navbar-height))' }}>
+        <Hero theme={theme} />
       </div>
       <About />
       <Journey />

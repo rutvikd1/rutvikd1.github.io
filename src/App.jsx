@@ -6,6 +6,7 @@ import Story from './pages/Story';
 import Resume from './pages/Resume';
 import NuclearLocalization from './pages/projects/NuclearLocalization';
 import TreeDetectionProject from './pages/projects/TreeDetectionProject';
+import GNSSMultipathAnalysis from './pages/projects/GNSSMultipathAnalysis';
 import './App.css';
 
 function ScrollToTop() {
@@ -67,8 +68,10 @@ function App() {
     root.style.setProperty('--mesh-opacity', isDark ? '0.82' : '1');
     root.style.setProperty('--mesh-blur', isDark ? '10px' : '8px');
 
-    document.body.style.backgroundColor = isDark ? '#0f172a' : '#f8fafc';
+    const bodyBg = isDark ? '#0f172a' : '#f8fafc';
+    document.body.style.backgroundColor = bodyBg;
     document.body.style.color = isDark ? '#f8fafc' : '#111827';
+    root.style.setProperty('--body-bg', bodyBg);
     window.localStorage.setItem('theme', theme);
   }, [theme]);
 
@@ -88,6 +91,7 @@ function App() {
 
         <Route path="/projects/nuclear-localization" element={<NuclearLocalization />} />
         <Route path="/projects/fallen-tree-detection" element={<TreeDetectionProject />} />
+        <Route path="/projects/gnss-multipath-analysis" element={<GNSSMultipathAnalysis />} />
         <Route path="/projects/NuclearLocalization" element={<Navigate to="/projects/nuclear-localization" replace />} />
         <Route path="/projects/TreeDetectionProject" element={<Navigate to="/projects/fallen-tree-detection" replace />} />
         <Route path="*" element={<Navigate to="/" replace />} />

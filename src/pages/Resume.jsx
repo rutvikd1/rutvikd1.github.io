@@ -47,6 +47,11 @@ const projects = [
     detail: 'Sensor fusion and state estimation workflow for real-time radiation source localization.',
     link: '/projects/nuclear-localization',
   },
+  {
+    title: 'GNSS Multipath Error Analysis',
+    detail: 'Carrier-phase differential GPS analysis and spatial error mapping at the VT drone park.',
+    link: '/projects/gnss-multipath-analysis',
+  },
 ];
 
 const skills = [

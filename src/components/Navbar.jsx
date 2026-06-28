@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 function Navbar({ theme, onToggleTheme }) {
@@ -8,28 +8,39 @@ function Navbar({ theme, onToggleTheme }) {
     typeof window !== 'undefined' ? window.innerWidth < 768 : false
   );
   const location = useLocation();
+  const navRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 12);
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 12);
     const handleResize = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
-      if (!mobile) {
-        setIsOpen(false);
-      }
+      if (!mobile) setIsOpen(false);
     };
-
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
     handleResize();
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
     };
+  }, []);
+
+  // Keep --navbar-height in sync with the actual rendered navbar height.
+  // ResizeObserver fires whenever the element changes size (e.g. mobile menu open/close),
+  // so no value is ever hardcoded.
+  useEffect(() => {
+    if (!navRef.current) return;
+    const update = () => {
+      document.documentElement.style.setProperty(
+        '--navbar-height',
+        `${navRef.current.offsetHeight}px`
+      );
+    };
+    const observer = new ResizeObserver(update);
+    observer.observe(navRef.current);
+    update(); // measure immediately on mount
+    return () => observer.disconnect();
   }, []);
 
   const closeMenu = () => setIsOpen(false);
@@ -70,7 +81,7 @@ function Navbar({ theme, onToggleTheme }) {
   });
 
   return (
-    <nav style={navStyle}>
+    <nav ref={navRef} style={navStyle}>
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '14px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px' }}>
         <Link to="/" onClick={closeMenu} style={{ fontSize: '20px', fontWeight: '800', color: 'var(--nav-text)', textDecoration: 'none' }}>
           Rutvik D
@@ -104,7 +115,7 @@ function Navbar({ theme, onToggleTheme }) {
               borderRadius: '999px',
               padding: '8px 10px',
               color: 'var(--nav-text)',
-              cursor: 'Rutvik'
+              cursor: 'pointer'
             }}
           >
             <span>{theme === 'dark' ? '☀️' : '🌙'}</span>
